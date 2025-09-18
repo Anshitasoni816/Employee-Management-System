@@ -22,9 +22,9 @@ const AuthProvider = ({children}) => {
             
             if(token) {
 
-              const response = await axios.get('http://localhost:5000/api/auth/verify',{
+              const response = await axios.get("http://localhost:3000/api/auth/verify",{
                 headers: {
-                  "Authorization" : ` Bearer ${token} `
+                  "Authorization" : `Bearer ${token}`
                 }
               })
 
@@ -39,6 +39,7 @@ const AuthProvider = ({children}) => {
             else {
  
                 setUser(null)
+                setLoading(false)
 
             }
 

@@ -33,10 +33,10 @@ const Loginn = () => {
                 localStorage.setItem("token", token)
 
                 if(user.role === "admin") {
-                    navigate('/admin-dashboard')
+                    navigate('/admin-dashboard',{replace : true})
                 }
                 else {
-                    navigate('/employee-dashboard')
+                    navigate('/employee-dashboard',{replace : true })
                 }
 
                 console.log("Login Success:", response.data);

@@ -6,6 +6,8 @@ import Loginn from './pages/Loginn'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EmployeeDashboard from './pages/EmployeeDashboard'
+import ProtectedRoutes from './utils/ProtectedRoutes'
+import PrivateRoutes from './utils/PrivateRoutes'
 
 const App = () => {
 
@@ -15,15 +17,27 @@ const App = () => {
 
       <Routes>
 
-        <Route path="/" element={<Navigate to="/admin-dashboard" />}> </Route>
+        <Route path="/" element={
+          <Navigate to="/admin-dashboard" />
+          }> </Route>
 
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/login" element={
+          <Login />
+        }></Route>
 
         <Route path="/loginn" element={<Loginn />}></Route>
 
-        <Route path="/admin-dashboard" element={<AdminDashboard />}></Route>
+        <Route path="/admin-dashboard" element={
+          <ProtectedRoutes>
+            <AdminDashboard />
+          </ProtectedRoutes>
+        }></Route>
 
-        <Route path="/employee-dashboard" element={<EmployeeDashboard />}></Route>
+        <Route path="/employee-dashboard" element={
+          <PrivateRoutes>
+            <EmployeeDashboard />
+          </PrivateRoutes>
+        }></Route>
 
       </Routes>
 
