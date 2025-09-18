@@ -40,7 +40,9 @@ class authController {
         {
           success: true,
           token,
-          _id: user._id, name: user.name, role: user.role
+          user: {
+            _id: user._id, name: user.name, role: user.role
+          }
         },
 
       );
@@ -53,6 +55,12 @@ class authController {
     }
 
   }
+
+  static verify = async(req,res) => {
+
+    return res.status(200).json({success:true, user: req.user}) 
+
+}
 
 }
 

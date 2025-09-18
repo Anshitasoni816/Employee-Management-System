@@ -3,38 +3,61 @@ import loginImage from '../assets/employee.jpg'
 import { FcGoogle } from "react-icons/fc";
 import axios from 'axios';
 import { toast } from "react-toastify";
+import { useAuth } from '../context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Loginn = () => {
 
     const [email, setemail] = useState('')
     const [password, setPassword] = useState('')
+    const { logIn } = useAuth()
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
+
         e.preventDefault()
 
         try {
 
             const response = await axios.post("http://localhost:3000/api/auth/login", { email, password })
 
-            toast.success("Login Successful");
 
-            console.log("✅ Login Success:", response.data);
+            const { token, user } = response.data
+            
+            if (response.data.success) {
+
+                toast.success("Login Successful");
+
+                logIn(user)
+
+                localStorage.setItem("token", token)
+
+                if(user.role === "admin") {
+                    navigate('/admin-dashboard')
+                }
+                else {
+                    navigate('/employee-dashboard')
+                }
+
+                console.log("Login Success:", response.data);
+
+            }
 
         } catch (error) {
 
-          if(error.response && !error.response.data.success) {
+            if (error.response && !error.response.data.success) {
 
-            toast.error(error.response.data.error)
-            console.log(error.response.data.error)
+                toast.error(error.response.data.error)
+                console.log(error.response.data.error)
 
-          }
+            }
 
-          else {
+            else {
 
-            toast.error("Server Error")
-            console.log("Server Error")
+                toast.error("Server Error")
+                console.log("Server Error")
 
-          }
+            }
 
         }
 

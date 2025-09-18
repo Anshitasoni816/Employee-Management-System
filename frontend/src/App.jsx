@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Loginn from './pages/Loginn'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import EmployeeDashboard from './pages/EmployeeDashboard'
 
 const App = () => {
 
@@ -19,9 +20,10 @@ const App = () => {
         <Route path="/login" element={<Login />}></Route>
 
         <Route path="/loginn" element={<Loginn />}></Route>
+
         <Route path="/admin-dashboard" element={<AdminDashboard />}></Route>
 
-
+        <Route path="/employee-dashboard" element={<EmployeeDashboard />}></Route>
 
       </Routes>
 
